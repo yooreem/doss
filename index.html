@@ -4,11 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Happy Second Month</title>
-    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body {
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
             background-color: #f0f0f0;
             display: flex;
             justify-content: center;
@@ -17,7 +20,7 @@
             overflow: hidden;
         }
 
-        .image-container {
+        .container {
             position: relative;
             width: 90vw;
             max-width: 500px;
@@ -28,95 +31,76 @@
         }
 
         /* The actual image */
-        .bg-image {
-            position: absolute;
-            top: 0;
-            left: 0;
+        .image {
             width: 100%;
             height: 100%;
-            background-image: 20260213225203_IMG_2301_edit_3847230263994.jpg
-            background-size: cover;
-            background-position: center;
+            object-fit: cover;
             transition: opacity 0.3s ease;
-            z-index: 1;
         }
 
-        /* The text grid that appears when zoomed */
-        .text-grid {
+        /* The text layer - hidden by default */
+        .text-overlay {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
+            background-color: white;
             display: grid;
-            /* Creates many small boxes */
-            grid-template-columns: repeat(25, 1fr);
-            grid-template-rows: repeat(25, 1fr);
+            grid-template-columns: repeat(30, 1fr);
             opacity: 0;
             transition: opacity 0.3s ease;
-            z-index: 2;
-            background-color: white;
+            padding: 5px;
         }
 
         .text-piece {
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 2px; /* Very small text normally */
-            font-family: sans-serif;
-            color: #333;
-            word-break: break-all;
+            font-size: 3px;
+            font-family: Arial, sans-serif;
+            color: #222;
+            font-weight: bold;
         }
 
-        /* When the container is hovered (simulating zoom) OR on large screens */
-        .image-container:hover .bg-image {
+        /* When you hover OR zoom in, show the text */
+        .container:hover .image {
             opacity: 0;
         }
 
-        .image-container:hover .text-grid {
+        .container:hover .text-overlay {
             opacity: 1;
         }
 
-        /* ACTUAL ZOOM functionality */
-        @media (min-resolution: 100dpi), 
-               (min-width: 1200px),
-               (max-resolution: 99dpi) and (min-width: 800px) {
+        /* This makes text bigger when browser zooms */
+        @media (min-zoom: 120%), 
+               (min-resolution: 120dpi) {
             .text-piece {
-                font-size: 10px;
+                font-size: 8px;
             }
         }
     </style>
 </head>
 <body>
 
-<div class="image-container" id="zoomBox">
-    <div class="bg-image"></div>
-    <div class="text-grid" id="textGrid">
-        <!-- Text will be filled by JavaScript -->
-    </div>
+<div class="container">
+    <img src="20260213225203_IMG_2301_edit_3847230263994.jpg" class="image" alt="Photo">
+    
+    <div class="text-overlay" id="textGrid"></div>
 </div>
 
 <script>
-    // Fill the grid with the text
     const grid = document.getElementById('textGrid');
     const message = "happy second month ";
     
-    // Create many cells
-    for (let i = 0; i < 625; i++) { 
+    // Create many small boxes
+    for (let i = 0; i < 900; i++) { 
         const cell = document.createElement('div');
         cell.classList.add('text-piece');
-        // Repeat the text so every box has the words
-        cell.innerText = message.trim();
+        cell.innerText = message;
         grid.appendChild(cell);
     }
-
-    // Optional: Click to toggle zoom effect
-    const container = document.getElementById('zoomBox');
-    container.addEventListener('click', function() {
-        this.classList.toggle('zoomed');
-    });
 </script>
 
 </body>
 </html>
-
