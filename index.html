@@ -10,7 +10,6 @@
             padding: 0;
             box-sizing: border-box;
         }
-
         body {
             background-color: #f0f0f0;
             display: flex;
@@ -19,7 +18,6 @@
             min-height: 100vh;
             overflow: hidden;
         }
-
         .container {
             position: relative;
             width: 90vw;
@@ -29,7 +27,6 @@
             overflow: hidden;
             cursor: zoom-in;
         }
-
         /* The actual image */
         .image {
             width: 100%;
@@ -37,7 +34,6 @@
             object-fit: cover;
             transition: opacity 0.3s ease;
         }
-
         /* The text layer - hidden by default */
         .text-overlay {
             position: absolute;
@@ -52,7 +48,6 @@
             transition: opacity 0.3s ease;
             padding: 5px;
         }
-
         .text-piece {
             display: flex;
             justify-content: center;
@@ -62,16 +57,13 @@
             color: #222;
             font-weight: bold;
         }
-
         /* When you hover OR zoom in, show the text */
         .container:hover .image {
             opacity: 0;
         }
-
         .container:hover .text-overlay {
             opacity: 1;
         }
-
         /* This makes text bigger when browser zooms */
         @media (min-zoom: 120%), 
                (min-resolution: 120dpi) {
@@ -82,13 +74,11 @@
     </style>
 </head>
 <body>
-
 <div class="container">
-    <img src="20260213225203_IMG_2301_edit_3847230263994.jpg" class="image" alt="Photo">
+    <img src= 20260213225203_IMG_2301_edit_3847230263994.jpg class="image" alt="Photo">
     
     <div class="text-overlay" id="textGrid"></div>
 </div>
-
 <script>
     const grid = document.getElementById('textGrid');
     const message = "happy second month ";
@@ -101,6 +91,5 @@
         grid.appendChild(cell);
     }
 </script>
-
 </body>
 </html>
