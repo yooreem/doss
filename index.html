@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Second Month</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        .image-container {
+            position: relative;
+            width: 90vw;
+            max-width: 500px;
+            aspect-ratio: 1 / 1;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            overflow: hidden;
+            cursor: zoom-in;
+        }
+
+        /* The actual image */
+        .bg-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url (20260213225203_IMG_2301_edit_3847230263994.jpg); /*
+            background-size: cover;
+            background-position: center;
+            transition: opacity 0.3s ease;
+            z-index: 1;
+        }
+
+        /* The text grid that appears when zoomed */
+        .text-grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: grid;
+            /* Creates many small boxes */
+            grid-template-columns: repeat(25, 1fr);
+            grid-template-rows: repeat(25, 1fr);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 2;
+            background-color: white;
+        }
+
+        .text-piece {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2px; /* Very small text normally */
+            font-family: sans-serif;
+            color: #333;
+            word-break: break-all;
+        }
+
+        /* When the container is hovered (simulating zoom) OR on large screens */
+        .image-container:hover .bg-image {
+            opacity: 0;
+        }
+
+        .image-container:hover .text-grid {
+            opacity: 1;
+        }
+
+        /* ACTUAL ZOOM functionality */
+        @media (min-resolution: 100dpi), 
+               (min-width: 1200px),
+               (max-resolution: 99dpi) and (min-width: 800px) {
+            .text-piece {
+                font-size: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="image-container" id="zoomBox">
+    <div class="bg-image"></div>
+    <div class="text-grid" id="textGrid">
+        <!-- Text will be filled by JavaScript -->
+    </div>
+</div>
+
+<script>
+    // Fill the grid with the text
+    const grid = document.getElementById('textGrid');
+    const message = "happy second month ";
+    
+    // Create many cells
+    for (let i = 0; i < 625; i++) { 
+        const cell = document.createElement('div');
+        cell.classList.add('text-piece');
+        // Repeat the text so every box has the words
+        cell.innerText = message.trim();
+        grid.appendChild(cell);
+    }
+
+    // Optional: Click to toggle zoom effect
+    const container = document.getElementById('zoomBox');
+    container.addEventListener('click', function() {
+        this.classList.toggle('zoomed');
+    });
+</script>
+
+</body>
+</html>
+
